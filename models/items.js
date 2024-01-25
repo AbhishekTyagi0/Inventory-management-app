@@ -1,29 +1,43 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
   item_name: {
     type: String,
-    require: true,
+    unique: true,
+    required: true,
+    trim: true,
+    minlength: 3,
   },
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   price: {
     type: Number,
-    require: true,
+    required: true,
   },
   quantity: {
     type: Number,
-    require: true,
+    required: true,
   },
+  status: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "ItemStatus",
+    },
+  ],
   categories: [
     {
-      type: Schema.types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Categories",
     },
   ],
+});
+
+// added virtual for item's URL
+itemSchema.virtual("url").get(function () {
+  return `/items/${this._id}`;
 });
 
 module.exports = mongoose.model("Items", itemSchema);
