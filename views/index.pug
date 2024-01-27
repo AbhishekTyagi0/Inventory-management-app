@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class='content')
+    h1= title
+    p Welcome to #[em Shopping Cart], a very basic shopping website developed using tech: #[strong mongoDB, Express, Nodejs, Pug].  
+
+    h1 Dynamic content
+
+    h5 The Cart has the following record counts: 
+
+    ul
+      li #[strong Total Items Count:] !{Item_count}
+      li #[strong Total Status Count:] !{Status_count}
+      li #[strong Total Items in Stock:] !{In_stock}
+      li #[strong Total Category count:] !{Category_count}
